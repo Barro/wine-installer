@@ -4,7 +4,7 @@ function finishProgram()
 {
     TMPDIR="$1"
     ERROR="$2"
-    if text -z "$TMPDIR"; then
+    if test -z "$TMPDIR"; then
         echo "Temporary directory string was empty"
         exit 1
     fi
@@ -49,8 +49,16 @@ echo "Created directory $COMPILEDIR"
 
 WINESTRING="wine-$VERSION"
 
+TARGETFILE="$COMPILEDIR"/"$WINESTRING".tar.bz2
+
 echo "Downloading wine $VERSION"
 
-wget --directory-prefix="$COMPILEDIR" http://prdownloads.sourceforge.net/wine/"$WINESTRING".tar.bz2 || finishProgram "$COMPILEDIR" "Could not download wine $VERSION"
+wget --directory-prefix="$COMPILEDIR" http://prdownloads.sourceforge.net/wine/"$WINESTRING".tar.bz2 -O "$TARGETFILE" || finishProgram "$COMPILEDIR" "Could not download wine $VERSION"
+
+tar xvjf "$TARGETFILE" -C "$COMPILEDIR" || finishProgram "$COMPILEDIR" "Could not extract file $TARGETFILE"
+
+cd "$COMPILEDIR"/"$WINESTRING" || finishProgram "$COMPILEDIR" "Wine did to extract to $COMPILEDIR/$WINESTRING"
+
+./configure --prefix="$PREFIX" && make depend && make -j 6 && mkdir -p "$PREFIX" && make install
 
 finishProgram "$COMPILEDIR"
