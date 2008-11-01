@@ -31,9 +31,11 @@ function finishProgram()
 
 VERSION="$1"
 PREFIX="$2"
+shift
+shift
 
 if test -z "$VERSION"; then
-    echo "Version information is needed"
+    echo "Usage wine_installer.sh version prefix"
     exit 1
 fi
 
@@ -59,6 +61,9 @@ tar xvjf "$TARGETFILE" -C "$COMPILEDIR" || finishProgram "$COMPILEDIR" "Could no
 
 cd "$COMPILEDIR"/"$WINESTRING" || finishProgram "$COMPILEDIR" "Wine did to extract to $COMPILEDIR/$WINESTRING"
 
-./configure --prefix="$PREFIX" && make depend && make -j 6 && mkdir -p "$PREFIX" && make install
+PROCESSORS="`cat /proc/cpuinfo | grep processor | wc -l`"
+CONCURRENCY="$PROCESSORS"
+
+./configure --prefix="$PREFIX" "$@" && make depend && make -j "$CONCURRENCY" && mkdir -p "$PREFIX" && make install
 
 finishProgram "$COMPILEDIR"
