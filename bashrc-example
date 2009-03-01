@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Add line like this to your .bashrc to use this
+. ~/wine_installer_path/bash_functions.sh ~/compiles ~/wine_installer_path
