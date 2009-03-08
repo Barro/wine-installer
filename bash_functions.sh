@@ -5,7 +5,7 @@ WINEVER_ROOT="$2"
 
 function winever() {
     VERSION="$1"
-    "$WINEVER_ROOT"/winever.sh "$WINE_INSTALL_PREFIX" "$VERSION"
+    . "$WINEVER_ROOT"/winever.sh "$WINE_INSTALL_PREFIX" "$VERSION"
 }
 
 function wine-install() {

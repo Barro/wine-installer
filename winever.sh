@@ -3,10 +3,16 @@
 WINE_PREFIX="$1"
 VERSION="$2"
 CURRDIR="`pwd`"
+RETURN="return"
 
 if test -z "$WINE_PREFIX"; then
     echo Usage: "$0" WINE_PREFIX [VERSION]
-    exit 1
+    $RETURN 1
+fi
+
+if test ! -d "$WINE_PREFIX"; then
+    echo Directory '"$WINE_PREFIX"' does not exist!
+    $RETURN 1
 fi
 
 # List available wine versions.
@@ -16,13 +22,13 @@ if test -z "$VERSION"; then
     fi
     ls -d "$WINE_PREFIX"/wine-* | perl -pe 's/(.+)wine-(.+)$/$2/gm'
     test -x "`which wine`" && echo "system"
-    exit
+    $RETURN
 fi
 
 if test "$VERSION" == "system"; then
     if test -z "$WINEVER"; then
         # No wine version changed, return immediately
-        exit
+        $RETURN
     fi
     PROGRAMPATH="$WINE_PREFIX"/wine-"$WINEVER"/bin
     export WINEVER=""
@@ -31,7 +37,7 @@ if test "$VERSION" == "system"; then
         unalias "$PROG"
     done
     cd "$CURRDIR"
-    exit
+    $RETURN
 fi
 
 PROGRAMPATH="$WINE_PREFIX"/wine-"$VERSION"/bin
