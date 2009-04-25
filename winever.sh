@@ -36,11 +36,14 @@ if test "$VERSION" == "system"; then
     for PROG in *; do
         unalias "$PROG"
     done
+    export MANPATH="$MANPATH_PREWINE"
+    unset MANPATH_PREWINE
     cd "$CURRDIR"
     $RETURN
 fi
 
-PROGRAMPATH="$WINE_PREFIX"/wine-"$VERSION"/bin
+WVROOT="$WINE_PREFIX"/wine-"$VERSION"
+PROGRAMPATH="$WVROOT"/bin
 if (! test -d "$PROGRAMPATH" ); then
     echo "No wine version '$VERSION' exists. Tried '$PROGRAMPATH'"
 else
@@ -49,5 +52,10 @@ else
     for PROG in *; do
         alias "$PROG"="$PROGRAMPATH"/"$PROG"
     done
+    if test -n "$MANPATH_PREWINE"; then
+        export MANPATH="$MANPATH_PREWINE"
+    fi
+    export MANPATH_PREWINE="$MANPATH"
+    export MANPATH="$MANPATH":"$WVROOT"/share/man
     cd "$CURRDIR"
 fi
