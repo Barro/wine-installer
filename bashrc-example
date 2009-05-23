@@ -2,3 +2,6 @@
 
 # Add line like this to your .bashrc to use this
 . ~/wine_installer_path/bash_functions.sh ~/compiles ~/wine_installer_path
+
+# And if you want to use the latest Wine version automatically:
+winever "`winever | tail -n 1`"
