@@ -58,10 +58,8 @@ else
         export MANPATH="$MANPATH_PREWINE"
     fi
     export MANPATH_PREWINE="$MANPATH"
-    if test -n "$MANPATH"; then
-        export MANPATH="$MANPATH":"$WVROOT"/share/man
-    else
-        export MANPATH="$WVROOT"/share/man
-    fi
+    # ":" is needed even when MANPATH is empty. Otherwise other man pages
+    # don't work.
+    export MANPATH="$MANPATH":"$WVROOT"/share/man
     cd "$CURRDIR"
 fi
