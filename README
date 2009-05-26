@@ -1,4 +1,8 @@
-#!/bin/bash
+Wine installer is a collection of scripts for Bash to manage and
+install multiple Wine versions.
+
+To use Wine installer, add following lines to your .bashrc, assuming
+that you have extracted this package to $HOME/wine-installer directory:
 
 # Environmental variables indicating where Wine installer can be found
 WINE_INSTALL_PATH="$HOME"/compiles

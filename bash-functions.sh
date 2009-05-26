@@ -15,15 +15,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 WINE_INSTALL_PREFIX="$1"
-WINEVER_ROOT="$2"
+WINE_INSTALLER_ROOT="$2"
 
 function winever() {
     VERSION="$1"
-    . "$WINEVER_ROOT"/winever.sh "$WINE_INSTALL_PREFIX" "$VERSION"
+    source "$WINE_INSTALLER_ROOT"/winever.sh "$WINE_INSTALL_PREFIX" "$VERSION"
 }
 
 function wine-install() {
     VERSION="$1"
     shift
-    "$WINEVER_ROOT"/wine_installer.sh "$VERSION" "$WINE_INSTALL_PREFIX"/wine-"$VERSION" "$@"
+    "$WINE_INSTALLER_ROOT"/wine-installer.sh "$VERSION" "$WINE_INSTALL_PREFIX"/wine-"$VERSION" "$@"
 }

@@ -49,7 +49,7 @@ shift
 shift
 
 if test -z "$VERSION"; then
-    echo "Usage wine_installer.sh version prefix"
+    echo "Usage $0 version prefix"
     exit 1
 fi
 
