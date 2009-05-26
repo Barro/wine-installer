@@ -4,12 +4,63 @@ install multiple Wine versions.
 To use Wine installer, add following lines to your .bashrc, assuming
 that you have extracted this package to $HOME/wine-installer directory:
 
-# Environmental variables indicating where Wine installer can be found
-WINE_INSTALL_PATH="$HOME"/wine-compiles
+------------------------------------------------------------------------
+# Environmental variables indicating where Wine installer can be found.
 WINE_INSTALLER_PATH="$HOME"/wine-installer
+# Different Wine versions are installed to this path by wine-installer.
+WINE_INSTALL_PATH="$HOME"/wine-compiles
 
-# Initialize Wine installer functions
+# Initialize Wine installer functions.
 source "$WINE_INSTALLER_PATH"/bash-functions.sh "$WINE_INSTALL_PATH" "$WINE_INSTALLER_PATH"
 
-# Load the newest Wine version on start
+# Load the newest Wine version on start or system version if one exists.
 winever "`winever | tail -n 1`"
+------------------------------------------------------------------------
+
+After this you have two commands that invoke Wine installer
+features. First is "winever" that you can use to see what Wine
+versions you have on system that are installed by Wine installer and
+if there is native Wine version installed on system.
+
+$ winever 1.1.22
+$ winever
+= 1.1.22
+1.1.5
+1.1.19
+1.1.22
+system wine-1.0.1
+
+Tells that you have Wine versions 1.1.5, 1.1.19 and 1.1.22 installed
+on your system with Wine installer and that you have native Wine 1.0.1
+installed you your system. This also sets the "MANPATH" variable so
+that "man wine" will bring the man page of currently used Wine. You
+can also see that Wine version 1.1.22 is now in use. 
+
+To reset back into the default Wine version on system, you can use
+"winever system":
+
+$ winever system
+$ winever
+1.1.5
+1.1.19
+1.1.22
+system wine-1.0.1
+
+To install different Wine versions you may use "wine-install"
+command. Just type "wine-install 1.1.4" and this will
+install Wine version 1.1.4 on your system, if you have all the
+compilation prerequisites that are needed to successfully compile
+Wine.
+
+$ wine-install 1.1.4
+Making temporary compilation directory
+Created directory /tmp/wine_install.XXXXD80AMR
+Downloading wine 1.1.4
+--2009-05-26 22:17:20--
+http://prdownloads.sourceforge.net/wine/wine-1.1.4.tar.bz2
+Resolving prdownloads.sourceforge.net... 216.34.181.59
+...
+A lot out output from installation
+...
+Finishing...
+Removing temporary directory /tmp/wine-install.XXXXD80AMR

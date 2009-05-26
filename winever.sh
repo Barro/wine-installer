@@ -34,12 +34,16 @@ if test -z "$VERSION"; then
     if test -n "$WINEVER"; then
         echo "= $WINEVER"
     fi
-    ls -d "$WINE_PREFIX"/wine-* | perl -pe 's/(.+)wine-(.+)$/$2/gm'
-    test -x "`which wine`" && echo "system"
+    ls -d "$WINE_PREFIX"/wine-* | sort -V | perl -pe 's/(.+)wine-(.+)$/$2/gm'
+    SYSTEM_WINE="`which wine`"
+    if test -x "$SYSTEM_WINE"; then
+        SYSTEM_WINE_VERSION="`"$SYSTEM_WINE" --version`"
+        echo "system $SYSTEM_WINE_VERSION"
+    fi
     $RETURN
 fi
 
-if test "$VERSION" == "system"; then
+if test "`echo "$VERSION" | cut -f 1 -d " "`" = "system"; then
     if test -z "$WINEVER"; then
         # No wine version changed, return immediately
         $RETURN
