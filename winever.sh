@@ -80,6 +80,6 @@ else
     export MANPATH_PREWINE="$MANPATH"
     # ":" is needed even when MANPATH is empty. Otherwise other man pages
     # don't work.
-    export MANPATH="$MANPATH":"$WVROOT"/share/man
+    export MANPATH="$WVROOT"/share/man:"$MANPATH"
     cd "$CURRDIR"
 fi
