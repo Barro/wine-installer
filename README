@@ -5,7 +5,7 @@ To use Wine installer, add following lines to your .bashrc, assuming
 that you have extracted this package to $HOME/wine-installer directory:
 
 # Environmental variables indicating where Wine installer can be found
-WINE_INSTALL_PATH="$HOME"/compiles
+WINE_INSTALL_PATH="$HOME"/wine-compiles
 WINE_INSTALLER_PATH="$HOME"/wine-installer
 
 # Initialize Wine installer functions
