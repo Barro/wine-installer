@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright 2009 Jussi Judin
 #
 # This program is free software: you can redistribute it and/or modify
