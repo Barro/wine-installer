@@ -1,0 +1,25 @@
+#!/bin/sh
+POSTFIX="$1"
+shift
+
+if test -z "$POSTFIX"; then
+    echo "Usage: winebottle prefix wine-command"
+    echo "Example: winebottle somename cmd"
+    echo "This would run command: 'wine cmd' under $HOME/.wine-somename"
+    exit 1
+fi
+
+PREFIX="$HOME"/.wine-
+if test -n "$WINEBOTTLEPREFIX"; then
+    PREFIX="$WINEBOTTLEPREFIX"
+fi
+
+WINEPREFIX="$PREFIX""$POSTFIX"
+
+if test ! -d "$WINEPREFIX"; then
+    echo "Wine path '$WINEPATH' does not exist. Creating..."
+    mkdir -p "$WINEPREFIX"
+fi
+
+export WINEPREFIX
+"$WINE" "$@"

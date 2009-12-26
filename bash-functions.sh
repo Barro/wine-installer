@@ -19,11 +19,15 @@ WINE_INSTALLER_ROOT="$2"
 
 function winever() {
     VERSION="$1"
-    source "$WINE_INSTALLER_ROOT"/winever.sh "$WINE_INSTALL_PREFIX" "$VERSION"
+    source "$WINE_INSTALLER_ROOT"/winever "$WINE_INSTALL_PREFIX" "$VERSION"
 }
 
 function wine-install() {
     VERSION="$1"
     shift
-    "$WINE_INSTALLER_ROOT"/wine-installer.sh "$VERSION" "$WINE_INSTALL_PREFIX"/wine-"$VERSION" "$@"
+    "$WINE_INSTALLER_ROOT"/wine-installer "$VERSION" "$WINE_INSTALL_PREFIX"/wine-"$VERSION" "$@"
+}
+
+function winebottle() {
+    "$WINE_INSTALLER_ROOT"/winebottle "$@"
 }
