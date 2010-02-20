@@ -46,13 +46,13 @@ $ winever
 1.1.22
 system wine-1.0.1
 
-To install different Wine versions you may use "wine-install"
-command. Just type "wine-install 1.1.4" and this will
+To install different Wine versions you may use "wineinstall"
+command. Just type "wineinstall 1.1.4" and this will
 install Wine version 1.1.4 on your system, if you have all the
 compilation prerequisites that are needed to successfully compile
 Wine.
 
-$ wine-install 1.1.4
+$ wineinstall 1.1.4
 Making temporary compilation directory
 Created directory /tmp/wine_install.XXXXD80AMR
 Downloading wine 1.1.4
@@ -63,4 +63,8 @@ Resolving prdownloads.sourceforge.net... 216.34.181.59
 A lot out output from installation
 ...
 Finishing...
-Removing temporary directory /tmp/wine-install.XXXXD80AMR
+Removing temporary directory /tmp/wineinstall.XXXXD80AMR
+
+Winebottle
+==========
+
