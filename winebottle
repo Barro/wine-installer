@@ -17,7 +17,7 @@ fi
 WINEPREFIX="$PREFIX""$POSTFIX"
 
 if test ! -d "$WINEPREFIX"; then
-    echo "Wine path '$WINEPATH' does not exist. Creating..."
+    echo "Wine path '$WINEPREFIX' does not exist. Creating..."
     mkdir -p "$WINEPREFIX"
 fi
 
