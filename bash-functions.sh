@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2009 Jussi Judin
+# Copyright 2009, 2010 Jussi Judin
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published
@@ -14,20 +14,11 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-WINE_INSTALL_PREFIX="$1"
-WINE_INSTALLER_ROOT="$2"
+export WINE_INSTALL_PREFIX="$1"
+export WINE_INSTALLER_ROOT="$2"
+
+export PATH="$PATH":"$WINE_INSTALLER_ROOT"
 
 function winever() {
-    VERSION="$1"
-    source "$WINE_INSTALLER_ROOT"/winever "$WINE_INSTALL_PREFIX" "$VERSION"
-}
-
-function wineinstall() {
-    VERSION="$1"
-    shift
-    "$WINE_INSTALLER_ROOT"/wineinstall "$VERSION" "$WINE_INSTALL_PREFIX"/wine-"$VERSION" "$@"
-}
-
-function winebottle() {
-    "$WINE_INSTALLER_ROOT"/winebottle "$@"
+    source "$WINE_INSTALLER_ROOT"/winever "$@"
 }

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2009 Jussi Judin
+# Copyright 2009, 2010 Jussi Judin
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published
@@ -44,8 +44,7 @@ function finishProgram()
 }
 
 VERSION="$1"
-PREFIX="$2"
-shift
+PREFIX="$WINE_INSTALL_PREFIX"/wine-"$VERSION"
 shift
 
 if test -z "$VERSION"; then
