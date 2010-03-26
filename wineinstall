@@ -59,7 +59,7 @@ if test -z "$PREFIX"; then
 fi
 
 echo "Making temporary compilation directory"
-COMPILEDIR="`mktemp -d -t wine-install.XXXXXXXXXX`"
+COMPILEDIR="`mktemp -d -t wineinstall.XXXXXXXXXX`"
 test -d "$COMPILEDIR" || exit 1
 echo "Created directory $COMPILEDIR"
 

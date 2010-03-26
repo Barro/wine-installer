@@ -22,10 +22,10 @@ function winever() {
     source "$WINE_INSTALLER_ROOT"/winever "$WINE_INSTALL_PREFIX" "$VERSION"
 }
 
-function wine-install() {
+function wineinstall() {
     VERSION="$1"
     shift
-    "$WINE_INSTALLER_ROOT"/wine-installer "$VERSION" "$WINE_INSTALL_PREFIX"/wine-"$VERSION" "$@"
+    "$WINE_INSTALLER_ROOT"/wineinstall "$VERSION" "$WINE_INSTALL_PREFIX"/wine-"$VERSION" "$@"
 }
 
 function winebottle() {
