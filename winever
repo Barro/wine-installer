@@ -87,3 +87,5 @@ else
     export MANPATH_PREWINE="$MANPATH"
     export MANPATH="$WVROOT"/share/man:"$MANPATH"
 fi
+
+export WINE=$(which wine)
