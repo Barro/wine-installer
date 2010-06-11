@@ -19,6 +19,6 @@ export WINE_INSTALLER_ROOT="$2"
 
 export PATH="$PATH":"$WINE_INSTALLER_ROOT"
 
-function winever() {
+winever() {
     source "$WINE_INSTALLER_ROOT"/winever "$@"
 }
