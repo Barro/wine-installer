@@ -16,7 +16,7 @@
 
 WINE_PREFIX="$WINE_INSTALL_PREFIX"
 VERSION="$1"
-CURRDIR="`pwd`"
+CURRDIR=$(pwd)
 RETURN="return"
 
 if test -z "$WINE_PREFIX"; then
@@ -32,31 +32,29 @@ fi
 # List available wine versions.
 if test -z "$VERSION"; then
 
-    # Check if there are any Wine version installed.
-    if test x"" = x$(ls "$WINE_PREFIX" 2>&1 | grep -v 'wine-*'); then
-        $RETURN
-    fi
-
     # Currently used Wine.
     if test -n "$WINEVER"; then
         echo "= $WINEVER"
     fi
 
-    ls -d "$WINE_PREFIX"/wine-* | sort -V | perl -pe 's/(.+)wine-(.+)$/$2/gm'
+    # Check if there are any Wine version installed.
+    if test x"" != x$(ls "$WINE_PREFIX" 2>&1 | grep -v 'wine-*'); then
+        ls -d "$WINE_PREFIX"/wine-* | sort -V | perl -pe 's/(.+)wine-(.+)$/$2/gm'
+    fi
 
-    SYSTEM_WINE="`which wine`"
+    SYSTEM_WINE=$(which wine)
     if test -n "$PATH_PREWINE"; then
         SYSTEM_WINE="$(PATH="$PATH_PREWINE" which wine)"
     fi
 
     if test -x "$SYSTEM_WINE"; then
-        SYSTEM_WINE_VERSION="`"$SYSTEM_WINE" --version`"
+        SYSTEM_WINE_VERSION=$("$SYSTEM_WINE" --version)
         echo "system $SYSTEM_WINE_VERSION"
     fi
     $RETURN
 fi
 
-if test "`echo "$VERSION" | cut -f 1 -d " "`" = "system"; then
+if test $(echo "$VERSION" | cut -f 1 -d " ") = "system"; then
     if test -z "$WINEVER"; then
         # No wine version changed, return immediately
         $RETURN
@@ -64,12 +62,12 @@ if test "`echo "$VERSION" | cut -f 1 -d " "`" = "system"; then
     PROGRAMPATH="$WINE_PREFIX"/wine-"$WINEVER"/bin
     export WINEVER=""
 
-    if test -n "`env | grep PATH_PREWINE`"; then
+    if test -n $(env | grep PATH_PREWINE); then
         export PATH="$PATH_PREWINE"
     fi
     unset PATH_PREWINE
 
-    if test -n "`env | grep MANPATH_PREWINE`"; then
+    if test -n $(env | grep MANPATH_PREWINE); then
         export MANPATH="$MANPATH_PREWINE"
     fi
     unset MANPATH_PREWINE
@@ -83,13 +81,13 @@ if (! test -d "$PROGRAMPATH" ); then
 else
     export WINEVER="$VERSION"
 
-    if test -n "`env | grep PATH_PREWINE`"; then
+    if test -n $(env | grep PATH_PREWINE); then
         export PATH="$PATH_PREWINE"
     fi
     export PATH_PREWINE="$PATH"
     export PATH="$PROGRAMPATH":"$PATH"
 
-    if test -n "`env | grep MANPATH_PREWINE`"; then
+    if test -n $(env | grep MANPATH_PREWINE); then
         export MANPATH="$MANPATH_PREWINE"
     fi
     export MANPATH_PREWINE="$MANPATH"
