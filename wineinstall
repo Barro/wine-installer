@@ -57,7 +57,7 @@ if test -z "$PREFIX"; then
 fi
 
 echo "Making temporary compilation directory"
-COMPILEDIR="`mktemp -d -t wineinstall.XXXXXXXXXX`"
+COMPILEDIR=$(mktemp -d -t wineinstall.XXXXXXXXXX)
 test -d "$COMPILEDIR" || exit 1
 echo "Created directory $COMPILEDIR"
 
@@ -73,7 +73,7 @@ tar xvjf "$TARGETFILE" -C "$COMPILEDIR" || finishProgram "$COMPILEDIR" "Could no
 
 cd "$COMPILEDIR"/"$WINESTRING" || finishProgram "$COMPILEDIR" "Wine did to extract to $COMPILEDIR/$WINESTRING"
 
-PROCESSORS="`cat /proc/cpuinfo | grep processor | wc -l`"
+PROCESSORS=$(cat /proc/cpuinfo | grep processor | wc -l)
 CONCURRENCY="$PROCESSORS"
 
 ./configure --prefix="$PREFIX" "$@" && make depend && make -j "$CONCURRENCY" && mkdir -p "$PREFIX" && make install

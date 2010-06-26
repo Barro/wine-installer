@@ -9,4 +9,4 @@ WINE_INSTALL_PATH="$HOME"/wine-compiles
 source "$WINE_INSTALLER_PATH"/bash-functions.sh "$WINE_INSTALL_PATH" "$WINE_INSTALLER_PATH"
 
 # Load the newest Wine version on start or system version if one exists.
-winever "`winever | tail -n 1`"
+winever $(winever | tail -n 1)
