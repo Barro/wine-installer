@@ -25,15 +25,23 @@ if test -z "$WINE_PREFIX"; then
 fi
 
 if test ! -d "$WINE_PREFIX"; then
-    echo Directory '"$WINE_PREFIX"' does not exist!
+    echo Directory "$WINE_PREFIX" does not exist!
     $RETURN 1
 fi
 
 # List available wine versions.
 if test -z "$VERSION"; then
+
+    # Check if there are any Wine version installed.
+    if test x"" = x$(ls "$WINE_PREFIX" 2>&1 | grep -v 'wine-*'); then
+        $RETURN
+    fi
+
+    # Currently used Wine.
     if test -n "$WINEVER"; then
         echo "= $WINEVER"
     fi
+
     ls -d "$WINE_PREFIX"/wine-* | sort -V | perl -pe 's/(.+)wine-(.+)$/$2/gm'
 
     SYSTEM_WINE="`which wine`"
