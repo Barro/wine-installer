@@ -38,7 +38,7 @@ if test -z "$VERSION"; then
     fi
 
     # Check if there are any Wine version installed.
-    if test x"" != x"$(ls "$WINE_PREFIX" 2>&1 | grep -v 'wine-*')"; then
+    if test x"" != x"$(ls "$WINE_PREFIX"/wine-* 2>&1 | grep -v 'wine-*')"; then
         ls -d "$WINE_PREFIX"/wine-* | sort -V | perl -pe 's/(.+)wine-(.+)$/$2/gm'
     fi
 
