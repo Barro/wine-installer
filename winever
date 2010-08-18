@@ -55,22 +55,23 @@ if test -z "$VERSION"; then
 fi
 
 if test $(echo "$VERSION" | cut -f 1 -d " ") = "system"; then
+    export WINE=$(which wine)
     if test -z "$WINEVER"; then
         # No wine version changed, return immediately
         $RETURN
     fi
-    PROGRAMPATH="$WINE_PREFIX"/wine-"$WINEVER"/bin
     export WINEVER=""
 
-    if test -n $(env | grep PATH_PREWINE); then
+    if test x$(env | grep PATH_PREWINE) != "x"; then
         export PATH="$PATH_PREWINE"
     fi
     unset PATH_PREWINE
 
-    if test -n $(env | grep MANPATH_PREWINE); then
+    if test x$(env | grep MANPATH_PREWINE) != "x"; then
         export MANPATH="$MANPATH_PREWINE"
     fi
     unset MANPATH_PREWINE
+
     $RETURN
 fi
 

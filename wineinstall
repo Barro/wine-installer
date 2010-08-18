@@ -76,6 +76,6 @@ cd "$COMPILEDIR"/"$WINESTRING" || finishProgram "$COMPILEDIR" "Wine did to extra
 PROCESSORS=$(cat /proc/cpuinfo | grep processor | wc -l)
 CONCURRENCY="$PROCESSORS"
 
-./configure --prefix="$PREFIX" "$@" && make depend && make -j "$CONCURRENCY" && mkdir -p "$PREFIX" && make install
+./configure --disable-tests --prefix="$PREFIX" "$@" && make depend && make -j "$CONCURRENCY" && mkdir -p "$PREFIX" && make install
 
 finishProgram "$COMPILEDIR"
