@@ -38,13 +38,13 @@ if test -z "$VERSION"; then
     fi
 
     # Check if there are any Wine version installed.
-    if test x"" != x$(ls "$WINE_PREFIX" 2>&1 | grep -v 'wine-*'); then
+    if test x"" != x"$(ls "$WINE_PREFIX"/wine-* 2>&1 | grep -v 'wine-*')"; then
         ls -d "$WINE_PREFIX"/wine-* | sort -V | perl -pe 's/(.+)wine-(.+)$/$2/gm'
     fi
 
     SYSTEM_WINE=$(which wine)
     if test -n "$PATH_PREWINE"; then
-        SYSTEM_WINE="$(PATH="$PATH_PREWINE" which wine)"
+        SYSTEM_WINE=$(PATH="$PATH_PREWINE" which wine)
     fi
 
     if test -x "$SYSTEM_WINE"; then
@@ -54,7 +54,7 @@ if test -z "$VERSION"; then
     $RETURN
 fi
 
-if test $(echo "$VERSION" | cut -f 1 -d " ") = "system"; then
+if test "$(echo "$VERSION" | cut -f 1 -d " ")" = "system"; then
     export WINE=$(which wine)
     if test -z "$WINEVER"; then
         # No wine version changed, return immediately
@@ -62,12 +62,12 @@ if test $(echo "$VERSION" | cut -f 1 -d " ") = "system"; then
     fi
     export WINEVER=""
 
-    if test x$(env | grep PATH_PREWINE) != "x"; then
+    if test -n "$(env | grep PATH_PREWINE)"; then
         export PATH="$PATH_PREWINE"
     fi
     unset PATH_PREWINE
 
-    if test x$(env | grep MANPATH_PREWINE) != "x"; then
+    if test -n "$(env | grep MANPATH_PREWINE)"; then
         export MANPATH="$MANPATH_PREWINE"
     fi
     unset MANPATH_PREWINE
@@ -82,13 +82,13 @@ if (! test -d "$PROGRAMPATH" ); then
 else
     export WINEVER="$VERSION"
 
-    if test -n $(env | grep PATH_PREWINE); then
+    if test -n "$(env | grep PATH_PREWINE)"; then
         export PATH="$PATH_PREWINE"
     fi
     export PATH_PREWINE="$PATH"
     export PATH="$PROGRAMPATH":"$PATH"
 
-    if test -n $(env | grep MANPATH_PREWINE); then
+    if test -n "$(env | grep MANPATH_PREWINE)"; then
         export MANPATH="$MANPATH_PREWINE"
     fi
     export MANPATH_PREWINE="$MANPATH"
